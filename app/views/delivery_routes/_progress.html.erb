@@ -1,0 +1,13 @@
+<%# 配達進捗表示パーシャル %>
+<div id="route_progress" class="route-progress">
+  <p>
+    <strong>進捗:</strong>
+    <span class="progress-count"><%= delivery_route.delivered_points %> / <%= delivery_route.total_points %> 件完了</span>
+    <span class="progress-percentage">（<%= delivery_route.progress_percentage %>%）</span>
+  </p>
+  <% if delivery_route.total_points > 0 %>
+    <div class="progress-bar">
+      <div class="progress-bar-fill" style="width: <%= delivery_route.progress_percentage %>%"></div>
+    </div>
+  <% end %>
+</div>

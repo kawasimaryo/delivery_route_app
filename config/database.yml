@@ -1,0 +1,37 @@
+# PostgreSQL データベース設定
+# 配達ルート最適化アプリ用のデータベース構成
+
+# 共通設定
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # コネクションプール設定
+  # 同時接続数の上限（環境変数で上書き可能）
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+# 開発環境
+development:
+  <<: *default
+  database: delivery_route_app_development
+  # ローカル開発用の認証設定（必要に応じてコメント解除）
+  # username: delivery_route_app
+  # password:
+  # host: localhost
+  # port: 5432
+
+# テスト環境
+# 注意: テストDBはテスト実行時に自動でリセットされます
+test:
+  <<: *default
+  database: delivery_route_app_test
+
+# 本番環境
+# セキュリティのため、認証情報は環境変数で管理
+production:
+  <<: *default
+  database: delivery_route_app_production
+  username: delivery_route_app
+  password: <%= ENV["DELIVERY_ROUTE_APP_DATABASE_PASSWORD"] %>
+  # 本番環境では必要に応じてホスト・ポートを指定
+  # host: <%= ENV["DATABASE_HOST"] %>
+  # port: <%= ENV["DATABASE_PORT"] %>

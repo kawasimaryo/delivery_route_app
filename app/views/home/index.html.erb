@@ -1,0 +1,32 @@
+<div class="landing">
+  <div class="landing-hero">
+    <h1 class="landing-title">配達ルート最適化アプリ</h1>
+    <p class="landing-subtitle">効率的な配達ルートで、時間とコストを削減</p>
+
+    <div class="landing-features">
+      <div class="feature">
+        <div class="feature-icon">📍</div>
+        <h3>配達先管理</h3>
+        <p>配達先を登録して一元管理</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🗺️</div>
+        <h3>ルート作成</h3>
+        <p>日別の配達ルートを簡単作成</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">✅</div>
+        <h3>進捗管理</h3>
+        <p>配達状況をリアルタイムで確認</p>
+      </div>
+    </div>
+
+    <div class="landing-actions">
+      <%= button_to "ゲストログインで試す", guest_login_path, method: :post, class: "btn btn-primary btn-lg" %>
+      <div class="landing-auth-links">
+        <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline" %>
+        <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline" %>
+      </div>
+    </div>
+  </div>
+</div>

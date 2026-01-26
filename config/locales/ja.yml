@@ -1,0 +1,125 @@
+# 日本語ロケール設定
+# 配達ルート最適化アプリ
+
+ja:
+  # 日付・時刻フォーマット
+  date:
+    formats:
+      default: "%Y年%m月%d日"
+      short: "%m/%d"
+      long: "%Y年%m月%d日(%a)"
+    day_names:
+      - 日曜日
+      - 月曜日
+      - 火曜日
+      - 水曜日
+      - 木曜日
+      - 金曜日
+      - 土曜日
+    abbr_day_names:
+      - 日
+      - 月
+      - 火
+      - 水
+      - 木
+      - 金
+      - 土
+    month_names:
+      - ~
+      - 1月
+      - 2月
+      - 3月
+      - 4月
+      - 5月
+      - 6月
+      - 7月
+      - 8月
+      - 9月
+      - 10月
+      - 11月
+      - 12月
+    abbr_month_names:
+      - ~
+      - 1月
+      - 2月
+      - 3月
+      - 4月
+      - 5月
+      - 6月
+      - 7月
+      - 8月
+      - 9月
+      - 10月
+      - 11月
+      - 12月
+
+  time:
+    formats:
+      default: "%Y年%m月%d日 %H:%M"
+      short: "%m/%d %H:%M"
+      long: "%Y年%m月%d日(%a) %H:%M:%S"
+
+  # ActiveRecord モデル
+  activerecord:
+    models:
+      user: ユーザー
+      delivery_route: 配達ルート
+      delivery_point: 配達先
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認）
+      delivery_route:
+        name: ルート名
+        description: 説明
+        date: 配達日
+        status: ステータス
+      delivery_point:
+        name: 配達先名
+        address: 住所
+        latitude: 緯度
+        longitude: 経度
+        position: 順番
+        memo: メモ
+        status: ステータス
+    errors:
+      messages:
+        blank: "を入力してください"
+        present: "は入力しないでください"
+        invalid: "は不正な値です"
+        taken: "はすでに存在します"
+        too_short: "は%{count}文字以上で入力してください"
+        too_long: "は%{count}文字以内で入力してください"
+        not_a_number: "は数値で入力してください"
+        greater_than: "は%{count}より大きい値にしてください"
+        less_than: "は%{count}より小さい値にしてください"
+
+  # ステータス翻訳
+  delivery_route:
+    status:
+      draft: 下書き
+      confirmed: 確定
+      completed: 完了
+
+  delivery_point:
+    status:
+      pending: 未配達
+      delivered: 配達済み
+      absent: 不在
+
+  # 共通メッセージ
+  helpers:
+    submit:
+      create: "登録"
+      update: "更新"
+      submit: "保存"
+      delivery_route:
+        create: "ルートを作成"
+        update: "ルートを更新"
+      delivery_point:
+        create: "配達先を追加"
+        update: "配達先を更新"
+    select:
+      prompt: "選択してください"

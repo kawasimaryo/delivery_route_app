@@ -1,0 +1,9 @@
+<%# ステータス更新後、配達先カードを差し替え %>
+<%= turbo_stream.replace "delivery_point_#{@delivery_point.id}" do %>
+  <%= render "delivery_routes/delivery_point", point: @delivery_point, index: @delivery_point.position + 1 %>
+<% end %>
+
+<%# 進捗情報を更新 %>
+<%= turbo_stream.replace "route_progress" do %>
+  <%= render "delivery_routes/progress", delivery_route: @delivery_route %>
+<% end %>

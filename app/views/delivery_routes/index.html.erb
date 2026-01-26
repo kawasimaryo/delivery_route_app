@@ -1,0 +1,51 @@
+<div class="page-header">
+  <h1>配達ルート一覧</h1>
+  <%= link_to "新規作成", new_delivery_route_path, class: "btn btn-primary" %>
+</div>
+
+<% if @delivery_routes.any? %>
+  <div class="route-list">
+    <% @delivery_routes.each do |route| %>
+      <div class="route-card">
+        <div class="route-card-header">
+          <h2 class="route-name"><%= link_to route.name, route %></h2>
+          <span class="route-status status-<%= route.status %>">
+            <%= t("delivery_route.status.#{route.status}") %>
+          </span>
+        </div>
+
+        <div class="route-card-body">
+          <% if route.date.present? %>
+            <p class="route-date">
+              <strong>配達日:</strong> <%= l(route.date, format: :default) %>
+            </p>
+          <% end %>
+
+          <% if route.description.present? %>
+            <p class="route-description"><%= truncate(route.description, length: 100) %></p>
+          <% end %>
+
+          <p class="route-points-count">
+            配達先: <%= route.total_points %>件
+            <% if route.total_points > 0 %>
+              （進捗: <%= route.progress_percentage %>%）
+            <% end %>
+          </p>
+        </div>
+
+        <div class="route-card-actions">
+          <%= link_to "詳細", route, class: "btn btn-sm" %>
+          <%= link_to "編集", edit_delivery_route_path(route), class: "btn btn-sm btn-outline" %>
+          <%= button_to "削除", route, method: :delete,
+                class: "btn btn-sm btn-danger",
+                form: { data: { turbo_confirm: "「#{route.name}」を削除しますか？" } } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="empty-state">
+    <p>配達ルートがありません。</p>
+    <%= link_to "最初のルートを作成", new_delivery_route_path, class: "btn btn-primary" %>
+  </div>
+<% end %>

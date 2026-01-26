@@ -1,0 +1,33 @@
+<%= form_with model: [@delivery_route, delivery_point], class: "form" do |f| %>
+  <% if delivery_point.errors.any? %>
+    <div class="error-messages">
+      <h3><%= delivery_point.errors.count %>件のエラーがあります</h3>
+      <ul>
+        <% delivery_point.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, "配達先名", class: "form-label required" %>
+    <%= f.text_field :name, class: "form-control", placeholder: "例：山田様宅", autofocus: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address, "住所", class: "form-label" %>
+    <%= f.text_field :address, class: "form-control", placeholder: "例：東京都渋谷区..." %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :memo, "メモ", class: "form-label" %>
+    <%= f.text_area :memo, class: "form-control", rows: 3,
+          placeholder: "配達時の注意事項など" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to "キャンセル", @delivery_route, class: "btn btn-outline" %>
+  </div>
+<% end %>

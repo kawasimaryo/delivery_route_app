@@ -1,0 +1,41 @@
+<%= form_with model: delivery_route, class: "form" do |f| %>
+  <% if delivery_route.errors.any? %>
+    <div class="error-messages">
+      <h3><%= delivery_route.errors.count %>件のエラーがあります</h3>
+      <ul>
+        <% delivery_route.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, "ルート名", class: "form-label required" %>
+    <%= f.text_field :name, class: "form-control", placeholder: "例：月曜午前ルート", autofocus: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :date, "配達日", class: "form-label" %>
+    <%= f.date_field :date, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :status, "ステータス", class: "form-label" %>
+    <%= f.select :status,
+          DeliveryRoute.statuses.keys.map { |s| [t("delivery_route.status.#{s}"), s] },
+          {},
+          class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, "説明・メモ", class: "form-label" %>
+    <%= f.text_area :description, class: "form-control", rows: 4,
+          placeholder: "ルートの説明や注意事項など" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to "キャンセル", delivery_routes_path, class: "btn btn-outline" %>
+  </div>
+<% end %>

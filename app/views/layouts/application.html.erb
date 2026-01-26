@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title><%= content_for(:title) || "配達ルート最適化アプリ" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <div class="header-brand">
+          <%= link_to "配達ルート最適化", root_path, class: "brand-link" %>
+        </div>
+
+        <nav class="header-nav">
+          <% if user_signed_in? %>
+            <%= link_to "ルート一覧", delivery_routes_path, class: "nav-link" %>
+            <span class="nav-user">
+              <%= current_user.name %>
+              <% if current_user.guest_user? %>
+                <span class="guest-badge">ゲスト</span>
+              <% end %>
+            </span>
+            <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-sm btn-outline" %>
+          <% else %>
+            <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
+            <%= link_to "新規登録", new_user_registration_path, class: "btn btn-sm btn-primary" %>
+          <% end %>
+        </nav>
+      </div>
+    </header>
+
+    <% if notice.present? %>
+      <div class="flash flash-notice"><%= notice %></div>
+    <% end %>
+    <% if alert.present? %>
+      <div class="flash flash-alert"><%= alert %></div>
+    <% end %>
+
+    <main class="main-content">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; <%= Date.current.year %> 配達ルート最適化アプリ</p>
+      </div>
+    </footer>
+  </body>
+</html>

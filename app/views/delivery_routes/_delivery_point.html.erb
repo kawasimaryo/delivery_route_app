@@ -1,0 +1,38 @@
+<%# 配達先カードパーシャル %>
+<div id="delivery_point_<%= point.id %>" class="delivery-point-card">
+  <div class="point-order"><%= index %></div>
+
+  <div class="point-content">
+    <h3 class="point-name"><%= point.name %></h3>
+    <% if point.address.present? %>
+      <p class="point-address"><%= point.address %></p>
+    <% end %>
+    <% if point.memo.present? %>
+      <p class="point-memo"><%= point.memo %></p>
+    <% end %>
+  </div>
+
+  <div class="point-actions">
+    <%# ステータス切り替えボタン %>
+    <div class="status-buttons">
+      <% DeliveryPoint.statuses.keys.each do |status| %>
+        <%= button_to update_status_delivery_route_delivery_point_path(point.delivery_route, point, status: status),
+              method: :patch,
+              class: "status-btn status-btn-#{status} #{'active' if point.status == status}",
+              title: t("delivery_point.status.#{status}") do %>
+          <%= status_icon(status) %>
+          <span class="status-label"><%= t("delivery_point.status.#{status}") %></span>
+        <% end %>
+      <% end %>
+    </div>
+
+    <%# 編集・削除ボタン %>
+    <div class="edit-buttons">
+      <%= link_to "編集", edit_delivery_route_delivery_point_path(point.delivery_route, point), class: "btn btn-sm btn-outline" %>
+      <%= button_to "削除", delivery_route_delivery_point_path(point.delivery_route, point),
+            method: :delete,
+            class: "btn btn-sm btn-danger",
+            form: { data: { turbo_confirm: "「#{point.name}」を削除しますか？" } } %>
+    </div>
+  </div>
+</div>

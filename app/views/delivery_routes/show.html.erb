@@ -1,0 +1,47 @@
+<div class="page-header">
+  <div class="page-header-content">
+    <h1><%= @delivery_route.name %></h1>
+    <span class="route-status status-<%= @delivery_route.status %>">
+      <%= t("delivery_route.status.#{@delivery_route.status}") %>
+    </span>
+  </div>
+  <div class="page-header-actions">
+    <%= link_to "編集", edit_delivery_route_path(@delivery_route), class: "btn btn-outline" %>
+    <%= link_to "一覧へ戻る", delivery_routes_path, class: "btn btn-outline" %>
+  </div>
+</div>
+
+<div class="route-detail">
+  <div class="route-info">
+    <% if @delivery_route.date.present? %>
+      <p><strong>配達日:</strong> <%= l(@delivery_route.date, format: :long) %></p>
+    <% end %>
+
+    <% if @delivery_route.description.present? %>
+      <p><strong>説明:</strong></p>
+      <p class="route-description"><%= simple_format(@delivery_route.description) %></p>
+    <% end %>
+
+    <%= render "delivery_routes/progress", delivery_route: @delivery_route %>
+  </div>
+
+  <div class="delivery-points-section">
+    <div class="section-header">
+      <h2>配達先一覧 (<%= @delivery_points.count %>件)</h2>
+      <%= link_to "配達先を追加", new_delivery_route_delivery_point_path(@delivery_route), class: "btn btn-primary" %>
+    </div>
+
+    <% if @delivery_points.any? %>
+      <div class="delivery-points-list">
+        <% @delivery_points.each.with_index(1) do |point, index| %>
+          <%= render "delivery_routes/delivery_point", point: point, index: index %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <p>配達先がまだ登録されていません。</p>
+        <%= link_to "最初の配達先を追加", new_delivery_route_delivery_point_path(@delivery_route), class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
