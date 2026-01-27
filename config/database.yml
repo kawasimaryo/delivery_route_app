@@ -25,13 +25,9 @@ test:
   <<: *default
   database: delivery_route_app_test
 
-# 本番環境
-# セキュリティのため、認証情報は環境変数で管理
+# 本番環境（Heroku対応）
+# HerokuはDATABASE_URL環境変数を自動設定
+# DATABASE_URLが設定されている場合はそちらを優先
 production:
   <<: *default
-  database: delivery_route_app_production
-  username: delivery_route_app
-  password: <%= ENV["DELIVERY_ROUTE_APP_DATABASE_PASSWORD"] %>
-  # 本番環境では必要に応じてホスト・ポートを指定
-  # host: <%= ENV["DATABASE_HOST"] %>
-  # port: <%= ENV["DATABASE_PORT"] %>
+  url: <%= ENV["DATABASE_URL"] %>
