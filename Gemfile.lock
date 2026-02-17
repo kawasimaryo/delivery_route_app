@@ -326,6 +326,7 @@ DEPENDENCIES
   devise-i18n
   importmap-rails
   jbuilder
+  net-protocol (~> 0.2.2)
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.2.3)

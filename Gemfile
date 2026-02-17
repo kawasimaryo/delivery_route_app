@@ -79,3 +79,5 @@ group :development do
   # Web Console - ブラウザ上でのデバッグコンソール
   gem "web-console"
 end
+
+gem "net-protocol", "~> 0.2.2"
