@@ -656,3 +656,166 @@ textarea.form-control {
   color: var(--color-text-muted);
   font-size: 0.875rem;
 }
+
+/* ============================================
+   地図セクション
+   ============================================ */
+.map-section {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.map-container {
+  width: 100%;
+  height: 400px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+.map-legend {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.75rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.legend-item::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.legend-pending::before {
+  background: #3b82f6;
+}
+
+.legend-delivered::before {
+  background: #22c55e;
+}
+
+.legend-absent::before {
+  background: #ef4444;
+}
+
+/* 地図エラー表示 */
+.map-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 200px;
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+}
+
+.map-error p {
+  margin: 0;
+}
+
+/* InfoWindow スタイル */
+.map-info-window {
+  max-width: 250px;
+  padding: 0.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif;
+}
+
+.map-info-window .info-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.map-info-window .info-order {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.map-info-window .info-name {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.map-info-window .info-status {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  margin-bottom: 0.5rem;
+}
+
+.map-info-window .info-status.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.map-info-window .info-status.status-delivered {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.map-info-window .info-status.status-absent {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.map-info-window .info-address {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.375rem;
+}
+
+.map-info-window .info-memo {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  padding: 0.375rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.map-info-window .info-actions {
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.map-info-window .info-link {
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 767px) {
+  .map-container {
+    height: 300px;
+  }
+
+  .map-legend {
+    flex-wrap: wrap;
+  }
+}

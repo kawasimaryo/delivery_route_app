@@ -47,6 +47,12 @@ gem "devise"
 gem "devise-i18n"
 
 # ============================================
+# 地図・ジオコーディング
+# ============================================
+# Geocoder - 住所から緯度経度を取得
+gem "geocoder"
+
+# ============================================
 # システム・ユーティリティ
 # ============================================
 # Windows用タイムゾーンデータ
@@ -70,6 +76,8 @@ group :development, :test do
   gem "brakeman", require: false
   # RuboCop - Rubyコードスタイルチェック
   gem "rubocop-rails-omakase", require: false
+  # Dotenv - 環境変数を.envファイルから読み込み
+  gem "dotenv-rails"
 end
 
 # ============================================

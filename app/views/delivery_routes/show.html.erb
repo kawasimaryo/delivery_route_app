@@ -25,6 +25,25 @@
     <%= render "delivery_routes/progress", delivery_route: @delivery_route %>
   </div>
 
+  <%# 地図表示セクション %>
+  <% if @delivery_points.any? %>
+    <div class="map-section">
+      <div class="section-header">
+        <h2>配達マップ</h2>
+        <div class="map-legend">
+          <span class="legend-item legend-pending">未配達</span>
+          <span class="legend-item legend-delivered">配達済み</span>
+          <span class="legend-item legend-absent">不在</span>
+        </div>
+      </div>
+      <div data-controller="map"
+           data-map-api-key-value="<%= google_maps_api_key %>"
+           data-map-points-value="<%= delivery_points_for_map(@delivery_points, @delivery_route).to_json %>">
+        <div data-map-target="container" class="map-container"></div>
+      </div>
+    </div>
+  <% end %>
+
   <div class="delivery-points-section">
     <div class="section-header">
       <h2>配達先一覧 (<%= @delivery_points.count %>件)</h2>
