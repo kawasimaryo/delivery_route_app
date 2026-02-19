@@ -1,0 +1,2 @@
+require 'openssl'
+OpenSSL::SSL::SSLContext::DEFAULT_PARAMS[:ca_file] = '/opt/homebrew/etc/openssl@3/cert.pem'
