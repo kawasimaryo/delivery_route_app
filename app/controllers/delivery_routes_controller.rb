@@ -8,7 +8,7 @@ class DeliveryRoutesController < ApplicationController
   # 配達ルート一覧
   # GET /delivery_routes
   def index
-    @delivery_routes = current_user.delivery_routes.recent
+    @delivery_routes = current_user.delivery_routes.includes(:delivery_points).recent
   end
 
   # 配達ルート詳細
