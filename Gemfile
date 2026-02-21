@@ -82,6 +82,8 @@ group :development, :test do
   gem "rspec-rails"
   # FactoryBot - テストデータ作成
   gem "factory_bot_rails"
+  # RSpec JUnit Formatter - CI用テスト結果出力
+  gem "rspec_junit_formatter"
 end
 
 # ============================================
