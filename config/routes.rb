@@ -9,6 +9,9 @@ Rails.application.routes.draw do
 
   # === 配達ルート ===
   resources :delivery_routes do
+    member do
+      post :optimize
+    end
     # === 配達先（ネストリソース） ===
     resources :delivery_points, except: [:index, :show] do
       member do

@@ -3,7 +3,7 @@
 # 配達ルートコントローラー
 # 配達ルートのCRUD操作を提供
 class DeliveryRoutesController < ApplicationController
-  before_action :set_delivery_route, only: [:show, :edit, :update, :destroy]
+  before_action :set_delivery_route, only: [:show, :edit, :update, :destroy, :optimize]
 
   # 配達ルート一覧
   # GET /delivery_routes
@@ -55,6 +55,33 @@ class DeliveryRoutesController < ApplicationController
   def destroy
     @delivery_route.destroy!
     redirect_to delivery_routes_path, notice: "配達ルートを削除しました。", status: :see_other
+  end
+
+  # ルート最適化
+  # POST /delivery_routes/:id/optimize
+  def optimize
+    result = RouteOptimizationService.new(@delivery_route).call
+
+    if result[:success]
+      @delivery_points = @delivery_route.delivery_points.ordered.reload
+      @polyline = result[:polyline]
+
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to @delivery_route, notice: "ルートを最適化しました。" }
+      end
+    else
+      respond_to do |format|
+        format.turbo_stream do
+          flash.now[:alert] = result[:error]
+          render turbo_stream: turbo_stream.replace(
+            "flash_messages",
+            partial: "shared/flash"
+          )
+        end
+        format.html { redirect_to @delivery_route, alert: result[:error] }
+      end
+    end
   end
 
   private

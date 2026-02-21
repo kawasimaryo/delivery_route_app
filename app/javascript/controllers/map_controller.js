@@ -6,7 +6,8 @@ export default class extends Controller {
   static targets = ["container", "infoPanel"]
   static values = {
     apiKey: String,
-    points: Array
+    points: Array,
+    polyline: String
   }
 
   connect() {
@@ -17,6 +18,7 @@ export default class extends Controller {
 
     this.markers = []
     this.infoWindow = null
+    this.routeLine = null
     this.loadGoogleMapsAPI()
   }
 
@@ -25,18 +27,21 @@ export default class extends Controller {
     if (this.infoWindow) {
       this.infoWindow.close()
     }
+    if (this.routeLine) {
+      this.routeLine.setMap(null)
+    }
   }
 
   loadGoogleMapsAPI() {
     // 既に読み込み済みの場合
-    if (window.google && window.google.maps) {
+    if (window.google && window.google.maps && window.google.maps.geometry) {
       this.initMap()
       return
     }
 
-    // Google Maps APIスクリプトを動的に読み込み
+    // Google Maps APIスクリプトを動的に読み込み（geometryライブラリ含む）
     const script = document.createElement("script")
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${this.apiKeyValue}&callback=Function.prototype`
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${this.apiKeyValue}&libraries=geometry&callback=Function.prototype`
     script.async = true
     script.defer = true
     script.onload = () => this.initMap()
@@ -78,6 +83,43 @@ export default class extends Controller {
     // 全マーカーが見えるようにフィット
     if (geocodedPoints.length > 0) {
       this.fitBounds(geocodedPoints)
+    }
+
+    // ルート線を描画（polylineがある場合）
+    if (this.hasPolylineValue && this.polylineValue) {
+      this.drawRoute(this.polylineValue)
+    }
+  }
+
+  // polylineValueが変更されたときの処理
+  polylineValueChanged() {
+    if (this.map && this.polylineValue) {
+      this.drawRoute(this.polylineValue)
+    }
+  }
+
+  // ルート描画メソッド
+  drawRoute(encodedPolyline) {
+    // 既存のルート線をクリア
+    if (this.routeLine) {
+      this.routeLine.setMap(null)
+    }
+
+    try {
+      // Polylineをデコードして描画
+      const path = google.maps.geometry.encoding.decodePath(encodedPolyline)
+
+      this.routeLine = new google.maps.Polyline({
+        path: path,
+        geodesic: true,
+        strokeColor: "#4285F4",
+        strokeOpacity: 0.8,
+        strokeWeight: 4
+      })
+
+      this.routeLine.setMap(this.map)
+    } catch (error) {
+      console.error("ルート描画エラー:", error)
     }
   }
 

@@ -1,3 +1,5 @@
+<div id="flash_messages"></div>
+
 <div class="page-header">
   <div class="page-header-content">
     <h1><%= @delivery_route.name %></h1>
@@ -6,6 +8,13 @@
     </span>
   </div>
   <div class="page-header-actions">
+    <% if @delivery_points.count >= 2 %>
+      <%= button_to "ルートを最適化",
+            optimize_delivery_route_path(@delivery_route),
+            method: :post,
+            class: "btn btn-primary",
+            data: { turbo_submits_with: "最適化中..." } %>
+    <% end %>
     <%= link_to "編集", edit_delivery_route_path(@delivery_route), class: "btn btn-outline" %>
     <%= link_to "一覧へ戻る", delivery_routes_path, class: "btn btn-outline" %>
   </div>
@@ -36,9 +45,11 @@
           <span class="legend-item legend-absent">不在</span>
         </div>
       </div>
-      <div data-controller="map"
+      <div id="map_container"
+           data-controller="map"
            data-map-api-key-value="<%= google_maps_api_key %>"
-           data-map-points-value="<%= delivery_points_for_map(@delivery_points, @delivery_route).to_json %>">
+           data-map-points-value="<%= delivery_points_for_map(@delivery_points, @delivery_route).to_json %>"
+           data-map-polyline-value="">
         <div data-map-target="container" class="map-container"></div>
       </div>
     </div>
@@ -51,7 +62,7 @@
     </div>
 
     <% if @delivery_points.any? %>
-      <div class="delivery-points-list">
+      <div id="delivery_points_list" class="delivery-points-list">
         <% @delivery_points.each.with_index(1) do |point, index| %>
           <%= render "delivery_routes/delivery_point", point: point, index: index %>
         <% end %>
