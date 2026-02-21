@@ -4,7 +4,7 @@
 # 配達ルートに紐づく配達先のCRUD操作を提供
 class DeliveryPointsController < ApplicationController
   before_action :set_delivery_route
-  before_action :set_delivery_point, only: [:edit, :update, :destroy, :update_status]
+  before_action :set_delivery_point, only: [ :edit, :update, :destroy, :update_status ]
 
   # 新規作成フォーム
   # GET /delivery_routes/:delivery_route_id/delivery_points/new

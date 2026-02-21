@@ -4,7 +4,7 @@
 # ログイン状態に応じてランディングページまたはダッシュボードを表示
 class HomeController < ApplicationController
   # ログイン前でもアクセス可能
-  skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :authenticate_user!, only: [ :index ]
 
   # トップページ
   # GET /

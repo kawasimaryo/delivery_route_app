@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       post :optimize
     end
     # === 配達先（ネストリソース） ===
-    resources :delivery_points, except: [:index, :show] do
+    resources :delivery_points, except: [ :index, :show ] do
       member do
         patch :update_status
       end

@@ -26,7 +26,7 @@ class CreateDeliveryPoints < ActiveRecord::Migration[7.2]
     end
 
     # 並び順でのソート用インデックス
-    add_index :delivery_points, [:delivery_route_id, :position]
+    add_index :delivery_points, [ :delivery_route_id, :position ]
     add_index :delivery_points, :status
   end
 end

@@ -3,7 +3,7 @@
 # 配達ルートコントローラー
 # 配達ルートのCRUD操作を提供
 class DeliveryRoutesController < ApplicationController
-  before_action :set_delivery_route, only: [:show, :edit, :update, :destroy, :optimize]
+  before_action :set_delivery_route, only: [ :show, :edit, :update, :destroy, :optimize ]
 
   # 配達ルート一覧
   # GET /delivery_routes
