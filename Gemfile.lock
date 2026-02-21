@@ -103,6 +103,7 @@ GEM
     devise-i18n (1.15.0)
       devise (>= 4.9.0)
       rails-i18n
+    diff-lcs (1.6.2)
     dotenv (3.2.0)
     dotenv-rails (3.2.0)
       dotenv (= 3.2.0)
@@ -110,6 +111,11 @@ GEM
     drb (2.2.3)
     erb (6.0.1)
     erubi (1.13.1)
+    factory_bot (6.5.6)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.5.1)
+      factory_bot (~> 6.5)
+      railties (>= 6.1.0)
     geocoder (1.8.6)
       base64 (>= 0.1.0)
       csv (>= 3.0.0)
@@ -249,6 +255,23 @@ GEM
     responders (3.2.0)
       actionpack (>= 7.0)
       railties (>= 7.0)
+    rspec-core (3.13.6)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.5)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.7)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-rails (8.0.3)
+      actionpack (>= 7.2)
+      activesupport (>= 7.2)
+      railties (>= 7.2)
+      rspec-core (~> 3.13)
+      rspec-expectations (~> 3.13)
+      rspec-mocks (~> 3.13)
+      rspec-support (~> 3.13)
+    rspec-support (3.13.7)
     rubocop (1.82.1)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
@@ -334,6 +357,7 @@ DEPENDENCIES
   devise
   devise-i18n
   dotenv-rails
+  factory_bot_rails
   geocoder
   importmap-rails
   jbuilder
@@ -341,6 +365,7 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.2.3)
+  rspec-rails
   rubocop-rails-omakase
   sprockets-rails
   stimulus-rails

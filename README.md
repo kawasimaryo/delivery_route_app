@@ -214,6 +214,8 @@ app/
 │   ├── user.rb                      # ユーザーモデル
 │   ├── delivery_route.rb            # 配達ルートモデル
 │   └── delivery_point.rb            # 配達先モデル
+├── services/
+│   └── route_optimization_service.rb # ルート最適化サービス
 └── views/
     ├── home/                        # トップページ
     ├── delivery_routes/             # 配達ルート画面

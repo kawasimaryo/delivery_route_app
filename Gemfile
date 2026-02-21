@@ -78,6 +78,10 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   # Dotenv - 環境変数を.envファイルから読み込み
   gem "dotenv-rails"
+  # RSpec - テストフレームワーク
+  gem "rspec-rails"
+  # FactoryBot - テストデータ作成
+  gem "factory_bot_rails"
 end
 
 # ============================================
